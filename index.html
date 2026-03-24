@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & ML Software Engineer | Portfolio</title>
+    <meta name="description" content="Dynamic portfolio for AI/ML and software engineering.">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+    
+    <nav class="glass-nav">
+        <div class="logo">Nexus<span>AI</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="glitch" data-text="HELLO, I'M ARYAN">HELLO, I'M ARYAN</h1>
+                <h2 class="subtitle">AI/ML Architect & Software Engineer</h2>
+                <p>Building the future with intelligent systems, neural networks, and scalable software architectures.</p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn primary-btn">View My Work</a>
+                    <a href="#contact" class="btn secondary-btn">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="cube-container">
+                    <div class="cube">
+                        <div class="face front"><i class="fa-solid fa-brain"></i></div>
+                        <div class="face back"><i class="fa-solid fa-code"></i></div>
+                        <div class="face right"><i class="fa-solid fa-database"></i></div>
+                        <div class="face left"><i class="fa-solid fa-network-wired"></i></div>
+                        <div class="face top"><i class="fa-solid fa-microchip"></i></div>
+                        <div class="face bottom"><i class="fa-solid fa-laptop-code"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="expertise" class="skills-section">
+            <h2 class="section-title">Core <span>Expertise</span></h2>
+            <div class="skills-grid">
+                <div class="skill-card glass-card">
+                    <div class="skill-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h3>Machine Learning</h3>
+                    <p>Deep Learning, NLP, Computer Vision, Predictive Modeling, PyTorch, TensorFlow.</p>
+                </div>
+                <div class="skill-card glass-card">
+                    <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
+                    <h3>Software Engineering</h3>
+                    <p>Scalable Backends, Microservices, API Design, Python, C++, Go, Java, Node.js.</p>
+                </div>
+                <div class="skill-card glass-card">
+                    <div class="skill-icon"><i class="fa-solid fa-cloud"></i></div>
+                    <h3>Cloud & MLOps</h3>
+                    <p>AWS, GCP, Docker, Kubernetes, CI/CD, Model Deployment & Monitoring.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects-section">
+            <h2 class="section-title">Featured <span>Projects</span></h2>
+            <div class="projects-grid">
+                <div class="project-card glass-card">
+                    <div class="project-img placeholder-1"></div>
+                    <div class="project-info">
+                        <h3>Autonomous Agent Framework</h3>
+                        <p>A scalable framework for deploying LLM-based autonomous agents to solve complex reasoning tasks.</p>
+                        <div class="tech-stack">
+                            <span>Python</span><span>LangChain</span><span>Docker</span>
+                        </div>
+                        <a href="#" class="btn outline-btn">View Source <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card glass-card">
+                    <div class="project-img placeholder-2"></div>
+                    <div class="project-info">
+                        <h3>Computer Vision Pipeline</h3>
+                        <p>Real-time object detection and tracking pipeline optimized for edge devices utilizing TensorRT.</p>
+                        <div class="tech-stack">
+                            <span>C++</span><span>OpenCV</span><span>TensorRT</span>
+                        </div>
+                        <a href="#" class="btn outline-btn">View Source <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card glass-card">
+                    <div class="project-img placeholder-3"></div>
+                    <div class="project-info">
+                        <h3>Neural Synth API</h3>
+                        <p>Generative AI model exposed via global top-tier low latency gRPC and REST APIs.</p>
+                        <div class="tech-stack">
+                            <span>Go</span><span>PyTorch</span><span>gRPC</span>
+                        </div>
+                        <a href="#" class="btn outline-btn">View Source <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">Initiate <span>Connection</span></h2>
+            <div class="contact-container glass-card">
+                <form id="contact-form">
+                    <div class="input-group">
+                        <input type="text" id="name" required placeholder=" ">
+                        <label for="name">System Name / ID</label>
+                    </div>
+                    <div class="input-group">
+                        <input type="email" id="email" required placeholder=" ">
+                        <label for="email">Comms Link (Email)</label>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="message" required placeholder=" " rows="5"></textarea>
+                        <label for="message">Data Payload</label>
+                    </div>
+                    <button type="submit" class="btn primary-btn submit-btn">
+                        <span>Transmit</span>
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </form>
+                <div class="contact-info">
+                    <h3>Direct Links</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fa-solid fa-envelope"></i></a>
+                    </div>
+                    <div class="terminal-box">
+                        <div class="terminal-header">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <div class="terminal-body" id="terminal-text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Aryan. Engineered with precise algorithms.</p>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
