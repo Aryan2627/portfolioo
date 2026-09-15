@@ -585,3 +585,66 @@ footer {
     .top    { transform: rotateX(90deg) translateZ(90px); }
     .bottom { transform: rotateX(-90deg) translateZ(90px); }
 }
+/* Timeline for Experience Section */
+.timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    position: relative;
+    padding-left: 20px;
+    margin-top: 20px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: var(--glass-border);
+}
+
+.timeline-item {
+    position: relative;
+    padding: 30px;
+    margin-left: 20px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -57px;
+    top: 35px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--accent-primary);
+    box-shadow: 0 0 10px var(--accent-primary);
+}
+
+.timeline-date {
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.timeline-item h3 {
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+    color: var(--text-main);
+}
+
+.timeline-item h4 {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.timeline-item p {
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
