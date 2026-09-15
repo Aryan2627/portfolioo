@@ -79,9 +79,10 @@ class Particle {
     this.vx = (Math.random() - 0.5) * 0.6;
     this.vy = (Math.random() - 0.5) * 0.6;
     this.r  = Math.random() * 1.5 + 0.5;
-    this.alpha = Math.random() * 0.35 + 0.08;
-    // Random color: orange or amber
-    this.hue = Math.random() > 0.5 ? 25 : 40;
+    this.alpha = Math.random() * 0.3 + 0.06;
+    // Tri-color: orange, pink, purple
+    const hues = [22, 330, 275];
+    this.hue = hues[Math.floor(Math.random() * hues.length)];
   }
   update() {
     this.x += this.vx; this.y += this.vy;
@@ -116,7 +117,7 @@ function animCanvas() {
         ctx.beginPath();
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(249,160,80,${alpha})`;
+        ctx.strokeStyle = `rgba(255,107,80,${alpha})`;
         ctx.lineWidth = 0.6;
         ctx.stroke();
       }
