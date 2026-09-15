@@ -2,64 +2,213 @@
    ARYAN TIWARI · PREMIUM PORTFOLIO JS
    ========================================= */
 
-/* ====== LOADER ====== */
-const loader     = document.getElementById('loader');
-const loaderFill = document.getElementById('loaderFill');
-const loaderText = document.getElementById('loaderText');
-const body       = document.body;
+/* ====================================================
+   CINEMATIC LOADER
+   ==================================================== */
+const loader      = document.getElementById('loader');
+const loaderFill  = document.getElementById('loaderFill');
+const loaderPct   = document.getElementById('loaderPercent');
+const loaderBarP  = document.getElementById('loaderBarPct');
+const loaderSt    = document.getElementById('loaderStatus');
+const body        = document.body;
 
-const loadSteps = [
-  { pct: 20,  txt: 'LOADING ASSETS...'   },
-  { pct: 50,  txt: 'BUILDING UI...'      },
-  { pct: 80,  txt: 'STARTING CANVAS...'  },
-  { pct: 100, txt: 'READY.'              },
+const STEPS = [
+  { pct: 8,   status: 'LOADING ASSETS...',        log: 0 },
+  { pct: 24,  status: 'PARSING STYLESHEETS...',   log: 1 },
+  { pct: 52,  status: 'INITIALIZING CANVAS...',   log: 2 },
+  { pct: 78,  status: 'MOUNTING COMPONENTS...',   log: 3 },
+  { pct: 95,  status: 'STARTING ANIMATIONS...',   log: 4 },
+  { pct: 100, status: 'LAUNCH SEQUENCE COMPLETE', log: -1 },
 ];
 
-let step = 0;
-function runLoader() {
-  if (step >= loadSteps.length) {
-    setTimeout(() => {
-      loader.classList.add('hidden');
-      body.classList.remove('loading');
-      triggerReveal();
-    }, 300);
-    return;
+let currentPct = 0;
+let stepIdx = 0;
+
+function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+
+function animatePctTo(target, duration, onDone) {
+  const start = currentPct;
+  const startTime = performance.now();
+  function tick(now) {
+    const t = Math.min((now - startTime) / duration, 1);
+    const eased = easeOutExpo(t);
+    const val = Math.round(start + (target - start) * eased);
+    currentPct = val;
+    // Update DOM
+    const numNode = loaderPct.childNodes[0];
+    if (numNode) numNode.textContent = val;
+    loaderPct.setAttribute('data-text', val);
+    loaderFill.style.width = val + '%';
+    loaderBarP.textContent = val + '%';
+    if (t < 1) { requestAnimationFrame(tick); }
+    else { onDone && onDone(); }
   }
-  const { pct, txt } = loadSteps[step++];
-  loaderFill.style.width = pct + '%';
-  loaderText.textContent = txt;
-  setTimeout(runLoader, 420);
+  requestAnimationFrame(tick);
 }
-setTimeout(runLoader, 200);
 
-/* ====== CUSTOM CURSOR ====== */
-const dot  = document.getElementById('cursorDot');
-const ring = document.getElementById('cursorRing');
-let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+function runStep() {
+  if (stepIdx >= STEPS.length) return;
+  const { pct, status, log } = STEPS[stepIdx++];
+  loaderSt.textContent = status;
+  if (log >= 0) {
+    const line = document.getElementById('log' + log);
+    if (line) line.classList.add('show');
+  }
+  const isLast = stepIdx === STEPS.length;
+  const dur = isLast ? 400 : 320 + Math.random() * 200;
+  animatePctTo(pct, dur, () => {
+    if (isLast) {
+      // Brief pause then split-reveal exit
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        body.classList.remove('loading');
+        setTimeout(triggerReveal, 800);
+      }, 500);
+    } else {
+      setTimeout(runStep, 100 + Math.random() * 160);
+    }
+  });
+}
 
+// Stagger log lines first appearance
+[0,1,2,3,4].forEach(i => {
+  const el = document.getElementById('log' + i);
+  if (el) el.style.transitionDelay = (i * 0.08) + 's';
+});
+
+setTimeout(runStep, 600);
+
+/* ====================================================
+   MULTI-LAYER CURSOR + TRAIL
+   ==================================================== */
+const cDot   = document.getElementById('cursorDot');
+const cRing  = document.getElementById('cursorRing');
+const cOuter = document.getElementById('cursorOuter');
+const cLabel = document.getElementById('cursorLabel');
+
+let mx = 0, my = 0;
+// Each layer has its own position + lerp speed
+const layers = [
+  { el: cRing,  x: 0, y: 0, speed: 0.14 },
+  { el: cOuter, x: 0, y: 0, speed: 0.07 },
+  { el: cLabel, x: 0, y: 0, speed: 0.14 },
+];
+
+// Trail constellation — 12 dots
+const TRAIL_COUNT = 12;
+const trail = [];
+for (let i = 0; i < TRAIL_COUNT; i++) {
+  const t = document.createElement('div');
+  t.className = 'cursor-trail';
+  const scale = 1 - i / TRAIL_COUNT;
+  t.style.cssText = `
+    width: ${Math.max(2, 5 * scale)}px;
+    height: ${Math.max(2, 5 * scale)}px;
+    opacity: ${(0.5 * scale).toFixed(2)};
+    filter: blur(${i > 6 ? 1 : 0}px);
+  `;
+  document.body.appendChild(t);
+  trail.push({ el: t, x: 0, y: 0, speed: 0.08 + (1 - scale) * 0.06 });
+}
+
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+
+// Direct dot follows mouse exactly
 document.addEventListener('mousemove', e => {
-  mouseX = e.clientX; mouseY = e.clientY;
-  dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
+  cDot.style.left = e.clientX + 'px';
+  cDot.style.top  = e.clientY + 'px';
 });
 
-// Smooth ring follow
-function animateRing() {
-  ringX += (mouseX - ringX) * 0.12;
-  ringY += (mouseY - ringY) * 0.12;
-  ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
-  requestAnimationFrame(animateRing);
+// Click effects
+document.addEventListener('mousedown', () => {
+  cDot.classList.add('clicking');
+  cRing.classList.add('clicking');
+  cOuter.classList.add('clicking');
+  // Ripple burst
+  createClickRipple(mx, my);
+});
+document.addEventListener('mouseup', () => {
+  cDot.classList.remove('clicking');
+  cRing.classList.remove('clicking');
+  cOuter.classList.remove('clicking');
+});
+
+// Click ripple
+function createClickRipple(x, y) {
+  const r = document.createElement('div');
+  r.style.cssText = `
+    position:fixed; border-radius:50%; pointer-events:none;
+    z-index:9994; border:1.5px solid rgba(255,107,53,0.7);
+    width:10px; height:10px;
+    left:${x}px; top:${y}px;
+    transform:translate(-50%,-50%);
+    animation:rippleBurst 0.6s var(--ease-out) forwards;
+  `;
+  document.body.appendChild(r);
+  setTimeout(() => r.remove(), 700);
 }
-animateRing();
+// Ripple keyframe injected once
+const rippleStyle = document.createElement('style');
+rippleStyle.textContent = `
+  @keyframes rippleBurst {
+    from { width:10px; height:10px; opacity:1; }
+    to   { width:80px; height:80px; opacity:0; }
+  }
+`;
+document.head.appendChild(rippleStyle);
 
-document.addEventListener('mousedown', () => ring.classList.add('clicking'));
-document.addEventListener('mouseup', () => ring.classList.remove('clicking'));
-
-document.querySelectorAll('a, button, .glass-card, .magnetic').forEach(el => {
-  el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
-  el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+// Hover effects — with custom label text
+const hoverMap = new Map([
+  ['a',       'VIEW'],
+  ['button',  'CLICK'],
+  ['.project-card', 'OPEN'],
+  ['.timeline-card', 'READ'],
+  ['.contact-pill', 'CONTACT'],
+  ['.pillar-card', 'LEARN'],
+]);
+hoverMap.forEach((label, selector) => {
+  document.querySelectorAll(selector).forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cRing.classList.add('hovered');
+      cOuter.classList.add('hovered');
+      cLabel.textContent = label;
+      cLabel.classList.add('show');
+    });
+    el.addEventListener('mouseleave', () => {
+      cRing.classList.remove('hovered');
+      cOuter.classList.remove('hovered');
+      cLabel.classList.remove('show');
+    });
+  });
 });
 
-/* ====== PARTICLE CANVAS ====== */
+// Animation loop for smooth-following layers
+function cursorLoop() {
+  // Ring and outer layers
+  layers.forEach(layer => {
+    layer.x += (mx - layer.x) * layer.speed;
+    layer.y += (my - layer.y) * layer.speed;
+    layer.el.style.left = layer.x + 'px';
+    layer.el.style.top  = layer.y + 'px';
+  });
+  // Trail: each follows the previous
+  if (trail.length) {
+    trail[0].x += (mx - trail[0].x) * trail[0].speed;
+    trail[0].y += (my - trail[0].y) * trail[0].speed;
+    trail[0].el.style.left = trail[0].x + 'px';
+    trail[0].el.style.top  = trail[0].y + 'px';
+    for (let i = 1; i < trail.length; i++) {
+      trail[i].x += (trail[i-1].x - trail[i].x) * trail[i].speed;
+      trail[i].y += (trail[i-1].y - trail[i].y) * trail[i].speed;
+      trail[i].el.style.left = trail[i].x + 'px';
+      trail[i].el.style.top  = trail[i].y + 'px';
+    }
+  }
+  requestAnimationFrame(cursorLoop);
+}
+cursorLoop();
+
+
 const canvas = document.getElementById('bg-canvas');
 const ctx    = canvas.getContext('2d');
 let W, H, particles = [];

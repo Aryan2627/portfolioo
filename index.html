@@ -11,16 +11,59 @@
 </head>
 <body class="loading">
 
-    <!-- Custom Cursor -->
-    <div class="cursor-dot" id="cursorDot"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
+    <!-- Custom Cursor — 4 layers -->
+    <div class="cursor-dot"   id="cursorDot"></div>
+    <div class="cursor-ring"  id="cursorRing"></div>
+    <div class="cursor-outer" id="cursorOuter"></div>
+    <div class="cursor-label" id="cursorLabel"></div>
 
-    <!-- Loader -->
+    <!-- Cinematic Loader -->
     <div class="loader" id="loader">
-        <div class="loader-inner">
-            <div class="loader-logo">AT</div>
-            <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
-            <div class="loader-text" id="loaderText">INITIALIZING...</div>
+        <!-- Split panels -->
+        <div class="loader-panel left"></div>
+        <div class="loader-panel right"></div>
+
+        <!-- Main content -->
+        <div class="loader-content">
+            <div class="loader-topbar"></div>
+
+            <!-- Corner brackets -->
+            <div class="loader-bracket tl"></div>
+            <div class="loader-bracket tr"></div>
+            <div class="loader-bracket bl"></div>
+            <div class="loader-bracket br"></div>
+
+            <div class="loader-sys-label">// Portfolio OS · Boot Sequence</div>
+
+            <div class="loader-percent" id="loaderPercent" data-text="0">
+                0<span class="loader-pct-sym">%</span>
+            </div>
+
+            <div class="loader-status-row">
+                <div class="loader-status-dot"></div>
+                <div class="loader-status-text" id="loaderStatus">INITIALIZING SYSTEMS...</div>
+            </div>
+
+            <div class="loader-bar-wrap">
+                <div class="loader-bar-track">
+                    <div class="loader-fill" id="loaderFill"></div>
+                </div>
+                <div class="loader-bar-labels">
+                    <span>PROGRESS</span>
+                    <span id="loaderBarPct">0%</span>
+                </div>
+            </div>
+
+            <!-- Terminal log lines -->
+            <div class="loader-log" id="loaderLog">
+                <div class="loader-log-line" id="log0">Loading assets...</div>
+                <div class="loader-log-line" id="log1">Compiling styles...</div>
+                <div class="loader-log-line" id="log2">Initializing canvas...<span class="log-ok"> ✓ OK</span></div>
+                <div class="loader-log-line" id="log3">Mounting components...<span class="log-ok"> ✓ OK</span></div>
+                <div class="loader-log-line" id="log4">Starting animations...<span class="log-warn"> ⚡ READY</span></div>
+            </div>
+
+            <div class="loader-version">v2.0.26 · aryan.dev</div>
         </div>
     </div>
 
