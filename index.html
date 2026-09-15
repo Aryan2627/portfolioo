@@ -4,179 +4,382 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aryan Tiwari | Product Engineer & Data Analyst</title>
-    <meta name="description" content="Portfolio of Aryan Tiwari, focusing on AI Product Engineering, Data Analytics, and Customer Success.">
+    <meta name="description" content="Portfolio of Aryan Tiwari — Product Engineer, Data Analyst, and Full-Stack Developer.">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="loading">
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-inner">
+            <div class="loader-logo">AT</div>
+            <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+            <div class="loader-text" id="loaderText">INITIALIZING...</div>
+        </div>
+    </div>
+
+    <!-- Noise Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Background Canvas -->
     <canvas id="bg-canvas"></canvas>
-    
-    <nav class="glass-nav">
-        <div class="logo">Aryan<span>.AI</span></div>
+
+    <!-- Navigation -->
+    <nav class="glass-nav" id="navbar">
+        <div class="nav-logo">
+            <span class="logo-text">Aryan<span class="accent">.</span></span>
+        </div>
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#expertise">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#home" class="nav-link" data-text="Home">Home</a></li>
+            <li><a href="#experience" class="nav-link" data-text="Experience">Experience</a></li>
+            <li><a href="#projects" class="nav-link" data-text="Projects">Projects</a></li>
+            <li><a href="#skills" class="nav-link" data-text="Skills">Skills</a></li>
+            <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
         </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
+        </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#home" class="mob-link">Home</a></li>
+            <li><a href="#experience" class="mob-link">Experience</a></li>
+            <li><a href="#projects" class="mob-link">Projects</a></li>
+            <li><a href="#skills" class="mob-link">Skills</a></li>
+            <li><a href="#contact" class="mob-link">Contact</a></li>
+        </ul>
+    </div>
+
     <main>
+        <!-- ==================== HERO ==================== -->
         <section id="home" class="hero">
+            <div class="hero-bg-text">PRODUCT</div>
             <div class="hero-content">
-                <h1 class="glitch" data-text="ARYAN TIWARI">ARYAN TIWARI</h1>
-                <h2 class="subtitle">Product Engineer & Data Analyst</h2>
-                <p>B.Tech Biotechnology graduate leveraging data analytics, machine learning, and full-stack engineering to build impactful user-centric products. Passionate about solving complex business problems through code and data.</p>
-                <div class="hero-cta">
-                    <a href="#experience" class="btn primary-btn">Explore Journey</a>
-                    <a href="#contact" class="btn secondary-btn">Establish Comm Link</a>
+                <div class="hero-badge" data-reveal>
+                    <span class="badge-dot"></span>
+                    Available for opportunities
+                </div>
+                <h1 class="hero-title" data-reveal>
+                    <span class="line-wrap"><span class="reveal-line">Building Products</span></span>
+                    <span class="line-wrap"><span class="reveal-line delay-1">That <em class="gradient-text">Matter.</em></span></span>
+                </h1>
+                <p class="hero-desc" data-reveal>
+                    I'm <strong>Aryan Tiwari</strong> — a Product Engineer & Data Analyst who bridges the gap between technology and business impact. B.Tech in Biotechnology, passionate about AI-driven products.
+                </p>
+                <div class="hero-stats" data-reveal>
+                    <div class="stat-item">
+                        <span class="stat-num" data-count="4">0</span>
+                        <span class="stat-label">Internships</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-num" data-count="2">0</span>
+                        <span class="stat-label">AI Projects</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <span class="stat-num" data-count="12">0</span>
+                        <span class="stat-label">Tech Stack</span>
+                    </div>
+                </div>
+                <div class="hero-cta" data-reveal>
+                    <a href="#projects" class="btn btn-primary magnetic">
+                        <span>Explore Work</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-ghost magnetic">
+                        <span>Contact Me</span>
+                    </a>
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="cube-container">
-                    <div class="cube">
-                        <div class="face front"><i class="fa-solid fa-chart-line"></i></div>
-                        <div class="face back"><i class="fa-solid fa-code"></i></div>
-                        <div class="face right"><i class="fa-solid fa-database"></i></div>
-                        <div class="face left"><i class="fa-solid fa-users-gear"></i></div>
-                        <div class="face top"><i class="fa-solid fa-brain"></i></div>
-                        <div class="face bottom"><i class="fa-solid fa-laptop-code"></i></div>
+                <div class="orb-scene">
+                    <div class="orb"></div>
+                    <div class="orb-ring ring-1"></div>
+                    <div class="orb-ring ring-2"></div>
+                    <div class="orb-ring ring-3"></div>
+                    <div class="float-card card-1 glass-card">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Data Analytics</span>
+                    </div>
+                    <div class="float-card card-2 glass-card">
+                        <i class="fa-solid fa-brain"></i>
+                        <span>ML / AI</span>
+                    </div>
+                    <div class="float-card card-3 glass-card">
+                        <i class="fa-solid fa-cube"></i>
+                        <span>Product</span>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+                <span>Scroll</span>
+            </div>
+        </section>
+
+        <!-- ==================== EXPERIENCE ==================== -->
+        <section id="experience" class="experience-section">
+            <div class="section-header" data-reveal>
+                <span class="section-tag">// 01</span>
+                <h2 class="section-title">Professional <span class="accent">Journey</span></h2>
+            </div>
+            <div class="timeline">
+                <div class="timeline-track"></div>
+
+                <div class="timeline-item" data-reveal>
+                    <div class="timeline-dot pulse"></div>
+                    <div class="timeline-card glass-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Aug 2026 – Present</div>
+                                <h3>Product Specialist</h3>
+                                <h4><a href="#" class="company-link">Zephyra</a></h4>
+                            </div>
+                            <div class="card-badge current">Current</div>
+                        </div>
+                        <p>Spearheading product strategy and user-centric feature development. Analyzing market trends and user feedback to drive roadmap decisions, ensuring alignment with market demands and enhancing product value.</p>
+                        <div class="card-tags">
+                            <span>Product Strategy</span><span>User Research</span><span>Roadmapping</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-reveal>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card glass-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> June 2026 – Aug 2026</div>
+                                <h3>Customer Success</h3>
+                                <h4><a href="#" class="company-link">Procol</a></h4>
+                            </div>
+                        </div>
+                        <p>Partnered with enterprise clients through end-to-end SaaS onboarding. Diagnosed churn drivers via data analysis, designed retention plans, and collaborated cross-functionally with product/engineering teams to resolve blockers and improve adoption rates.</p>
+                        <div class="card-tags">
+                            <span>SaaS</span><span>Churn Analysis</span><span>Client Success</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-reveal>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card glass-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> June 2025 – Aug 2025</div>
+                                <h3>QC Analyst</h3>
+                                <h4><a href="#" class="company-link">IOL Chemicals & Pharmaceuticals</a></h4>
+                            </div>
+                        </div>
+                        <p>Supported quality assurance operations in pharmaceutical manufacturing. Monitored processes, reviewed documentation, and tracked deviations against GMP standards and SOPs to ensure regulatory compliance.</p>
+                        <div class="card-tags">
+                            <span>Quality Assurance</span><span>GMP</span><span>Data Review</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item" data-reveal>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-card glass-card">
+                        <div class="card-header">
+                            <div>
+                                <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> May 2024 – July 2024</div>
+                                <h3>Data & Supply Chain Intern</h3>
+                                <h4><a href="#" class="company-link">Nestlé</a></h4>
+                            </div>
+                        </div>
+                        <p>Cleaned and analyzed structured datasets to support supply chain decisions, improving data consistency by 10–12%. Researched AI applications in supply chain and consumer behavior, yielding ~10–12% operational efficiency gains.</p>
+                        <div class="card-tags">
+                            <span>Data Analysis</span><span>Supply Chain</span><span>AI Research</span><span>Python</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="experience" class="experience-section">
-            <h2 class="section-title">Professional <span>Experience</span></h2>
-            <div class="timeline">
-                <div class="timeline-item glass-card">
-                    <div class="timeline-date">Aug 2026 – Present</div>
-                    <h3>Product Specialist</h3>
-                    <h4>Zephyra</h4>
-                    <p>Spearheading product strategies and specializing in user-centric feature development. Analyzing market trends and user feedback to ensure alignment with market demands, ultimately enhancing overall product value and user satisfaction.</p>
-                </div>
-                <div class="timeline-item glass-card">
-                    <div class="timeline-date">June 2026 – Aug 2026</div>
-                    <h3>Customer Success</h3>
-                    <h4>Procol</h4>
-                    <p>Partnered with enterprise clients through end-to-end SaaS onboarding. Diagnosed churn drivers via data, designed retention plans, and collaborated cross-functionally with product/engineering to resolve blockers and improve adoption.</p>
-                </div>
-                <div class="timeline-item glass-card">
-                    <div class="timeline-date">June 2025 – Aug 2025</div>
-                    <h3>QC Analyst</h3>
-                    <h4>IOL Chemicals and Pharmaceuticals Limited</h4>
-                    <p>Supported quality assurance operations in manufacturing. Monitored processes, reviewed documentation, and tracked deviations against GMP standards and SOPs.</p>
-                </div>
-                <div class="timeline-item glass-card">
-                    <div class="timeline-date">May 2024 – July 2024</div>
-                    <h3>Data & Supply Chain Intern</h3>
-                    <h4>Nestlé</h4>
-                    <p>Cleaned and analyzed structured datasets to support decisions (improved consistency 10-12%). Researched AI applications in supply chain and consumer behavior, yielding ~10-12% operational efficiency gains.</p>
-                </div>
-            </div>
-        </section>
-
+        <!-- ==================== PROJECTS ==================== -->
         <section id="projects" class="projects-section">
-            <h2 class="section-title">Product <span>Projects</span></h2>
+            <div class="section-header" data-reveal>
+                <span class="section-tag">// 02</span>
+                <h2 class="section-title">Featured <span class="accent">Projects</span></h2>
+            </div>
             <div class="projects-grid">
-                <div class="project-card glass-card">
-                    <div class="project-img placeholder-1"></div>
-                    <div class="project-info">
+                <div class="project-card glass-card" data-reveal>
+                    <div class="project-number">01</div>
+                    <div class="project-glow glow-blue"></div>
+                    <div class="project-icon-wrap">
+                        <i class="fa-solid fa-shirt"></i>
+                    </div>
+                    <div class="project-content">
                         <h3>AI Fashion Buddy</h3>
-                        <p>End-to-end full-stack application with ML-based similarity search. Owned product scope, built MVP, and shipped solutions for fashion discovery.</p>
+                        <p>End-to-end full-stack application powered by ML-based similarity search. Owned product scope, built MVP from scratch, and shipped solutions for intelligent fashion discovery at scale.</p>
+                    </div>
+                    <div class="project-footer">
                         <div class="tech-stack">
                             <span>React.js</span><span>FastAPI</span><span>PyTorch</span><span>Scikit-learn</span>
                         </div>
-                        <a href="https://github.com/Aryan2627" target="_blank" class="btn outline-btn">View Source <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="https://github.com/Aryan2627" target="_blank" class="project-link magnetic">
+                            <span>View</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="project-card glass-card">
-                    <div class="project-img placeholder-2"></div>
-                    <div class="project-info">
-                        <h3>Vendor Performance Analysis</h3>
-                        <p>Interactive analytics dashboard translating business questions into metrics. Identified supply chain bottlenecks through data, informing efficiency decisions.</p>
+
+                <div class="project-card glass-card featured" data-reveal>
+                    <div class="project-number">02</div>
+                    <div class="project-glow glow-purple"></div>
+                    <div class="project-icon-wrap">
+                        <i class="fa-solid fa-chart-bar"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Vendor Performance Analytics</h3>
+                        <p>Interactive analytics dashboard translating complex business questions into actionable metrics. Identified supply chain bottlenecks through data visualization, directly informing executive decisions.</p>
+                    </div>
+                    <div class="project-footer">
                         <div class="tech-stack">
                             <span>Python</span><span>SQL</span><span>Power BI</span><span>Excel</span>
                         </div>
-                        <a href="https://github.com/Aryan2627" target="_blank" class="btn outline-btn">View Source <i class="fa-solid fa-arrow-right"></i></a>
+                        <a href="https://github.com/Aryan2627" target="_blank" class="project-link magnetic">
+                            <span>View</span><i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="expertise" class="skills-section">
-            <h2 class="section-title">Core <span>Competencies</span></h2>
-            <div class="skills-grid">
-                <div class="skill-card glass-card">
-                    <div class="skill-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
-                    <h3>Product Skills</h3>
-                    <p>User Research, Problem Diagnosis, Requirements Gathering, Cross-functional Collaboration, Churn/Retention Analysis.</p>
+        <!-- ==================== SKILLS ==================== -->
+        <section id="skills" class="skills-section">
+            <div class="section-header" data-reveal>
+                <span class="section-tag">// 03</span>
+                <h2 class="section-title">Core <span class="accent">Competencies</span></h2>
+            </div>
+            <div class="skills-container">
+                <div class="skills-col" data-reveal>
+                    <h3 class="skills-cat-title"><i class="fa-solid fa-lightbulb"></i> Product</h3>
+                    <div class="skill-bars">
+                        <div class="skill-bar"><span>User Research</span><div class="bar-track"><div class="bar-fill" data-w="90"></div></div></div>
+                        <div class="skill-bar"><span>Roadmapping</span><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
+                        <div class="skill-bar"><span>Churn Analysis</span><div class="bar-track"><div class="bar-fill" data-w="80"></div></div></div>
+                        <div class="skill-bar"><span>Cross-functional Collab</span><div class="bar-track"><div class="bar-fill" data-w="92"></div></div></div>
+                    </div>
                 </div>
-                <div class="skill-card glass-card">
-                    <div class="skill-icon"><i class="fa-solid fa-code"></i></div>
-                    <h3>Technical Stack</h3>
-                    <p>Python, SQL, React, FastAPI, Git/GitHub, PyTorch, Scikit-learn.</p>
+                <div class="skills-col" data-reveal>
+                    <h3 class="skills-cat-title"><i class="fa-solid fa-code"></i> Engineering</h3>
+                    <div class="skill-bars">
+                        <div class="skill-bar"><span>Python</span><div class="bar-track"><div class="bar-fill" data-w="88"></div></div></div>
+                        <div class="skill-bar"><span>SQL</span><div class="bar-track"><div class="bar-fill" data-w="85"></div></div></div>
+                        <div class="skill-bar"><span>React.js / FastAPI</span><div class="bar-track"><div class="bar-fill" data-w="78"></div></div></div>
+                        <div class="skill-bar"><span>PyTorch / ML</span><div class="bar-track"><div class="bar-fill" data-w="75"></div></div></div>
+                    </div>
                 </div>
-                <div class="skill-card glass-card">
-                    <div class="skill-icon"><i class="fa-solid fa-chart-pie"></i></div>
-                    <h3>Data & Design</h3>
-                    <p>Power BI, Excel, Figma, A/B Testing, Wireframing Basics, Data Analytics.</p>
+                <div class="skills-col" data-reveal>
+                    <h3 class="skills-cat-title"><i class="fa-solid fa-chart-pie"></i> Analytics & Design</h3>
+                    <div class="skill-bars">
+                        <div class="skill-bar"><span>Power BI</span><div class="bar-track"><div class="bar-fill" data-w="84"></div></div></div>
+                        <div class="skill-bar"><span>Figma</span><div class="bar-track"><div class="bar-fill" data-w="72"></div></div></div>
+                        <div class="skill-bar"><span>Excel / A-B Testing</span><div class="bar-track"><div class="bar-fill" data-w="88"></div></div></div>
+                        <div class="skill-bar"><span>Git / GitHub</span><div class="bar-track"><div class="bar-fill" data-w="90"></div></div></div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="education-block glass-card" style="margin-top: 40px; text-align: center;">
-                <h3 style="color: var(--accent-primary); margin-bottom: 10px;">Education & Certifications</h3>
-                <p><strong>B.Tech Biotechnology</strong> — Jaypee Institute of Information Technology (2022-2026)</p>
-                <p style="margin-top: 10px; color: var(--text-muted);">Certifications: Google AI Essentials, SQL Analytics and Power BI</p>
+
+            <div class="edu-cert-row" data-reveal>
+                <div class="edu-card glass-card">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <div>
+                        <h4>B.Tech Biotechnology</h4>
+                        <p>Jaypee Institute of Information Technology · 2022–2026</p>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <i class="fa-brands fa-google"></i>
+                    <div>
+                        <h4>Google AI Essentials</h4>
+                        <p>Certified · Google</p>
+                    </div>
+                </div>
+                <div class="cert-card glass-card">
+                    <i class="fa-solid fa-database"></i>
+                    <div>
+                        <h4>SQL Analytics & Power BI</h4>
+                        <p>Certified · Data Analytics Track</p>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- ==================== CONTACT ==================== -->
         <section id="contact" class="contact-section">
-            <h2 class="section-title">Initiate <span>Connection</span></h2>
-            <div class="contact-container glass-card">
-                <form id="contact-form">
-                    <div class="input-group">
-                        <input type="text" id="name" required placeholder=" ">
-                        <label for="name">System Name / ID</label>
+            <div class="section-header" data-reveal>
+                <span class="section-tag">// 04</span>
+                <h2 class="section-title">Let's <span class="accent">Connect</span></h2>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-left" data-reveal>
+                    <p class="contact-intro">I'm always open to discussing product opportunities, data analytics challenges, or just a great conversation about technology.</p>
+                    <div class="contact-methods">
+                        <a href="mailto:AryanTiwarihynm@gmail.com" class="contact-pill glass-card">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>AryanTiwarihynm@gmail.com</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square small"></i>
+                        </a>
+                        <a href="https://github.com/Aryan2627" target="_blank" class="contact-pill glass-card">
+                            <i class="fa-brands fa-github"></i>
+                            <span>github.com/Aryan2627</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square small"></i>
+                        </a>
+                        <a href="#" class="contact-pill glass-card">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                            <span>LinkedIn Profile</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square small"></i>
+                        </a>
                     </div>
-                    <div class="input-group">
-                        <input type="email" id="email" required placeholder=" ">
-                        <label for="email">Comms Link (Email)</label>
-                    </div>
-                    <div class="input-group">
-                        <textarea id="message" required placeholder=" " rows="5"></textarea>
-                        <label for="message">Data Payload</label>
-                    </div>
-                    <button type="submit" class="btn primary-btn submit-btn">
-                        <span>Transmit</span>
-                        <i class="fa-solid fa-paper-plane"></i>
-                    </button>
-                </form>
-                <div class="contact-info">
-                    <h3>Direct Links</h3>
-                    <div class="social-links">
-                        <a href="https://github.com/Aryan2627" target="_blank" class="social-icon"><i class="fa-brands fa-github"></i></a>
-                        <a href="#" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="mailto:AryanTiwarihynm@gmail.com" class="social-icon"><i class="fa-solid fa-envelope"></i></a>
-                    </div>
-                    <div class="terminal-box">
-                        <div class="terminal-header">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
+                </div>
+                <div class="contact-right" data-reveal>
+                    <form id="contact-form" class="glass-card contact-form-card">
+                        <div class="input-group">
+                            <input type="text" id="name" required placeholder=" ">
+                            <label for="name">Your Name</label>
+                            <div class="input-line"></div>
                         </div>
-                        <div class="terminal-body" id="terminal-text">
+                        <div class="input-group">
+                            <input type="email" id="email" required placeholder=" ">
+                            <label for="email">Your Email</label>
+                            <div class="input-line"></div>
                         </div>
-                    </div>
+                        <div class="input-group">
+                            <textarea id="message" required placeholder=" " rows="4"></textarea>
+                            <label for="message">Message</label>
+                            <div class="input-line"></div>
+                        </div>
+                        <button type="submit" class="btn btn-primary full-width magnetic" id="submitBtn">
+                            <span id="btnText">Send Message</span>
+                            <i class="fa-solid fa-paper-plane" id="btnIcon"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2026 Aryan Tiwari. Engineered with precise algorithms.</p>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <span class="footer-logo">Aryan<span class="accent">.</span></span>
+            <p>&copy; 2026 Aryan Tiwari · Crafted with precision & passion.</p>
+            <div class="footer-socials">
+                <a href="https://github.com/Aryan2627" target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="mailto:AryanTiwarihynm@gmail.com"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
     </footer>
 
     <script src="main.js"></script>
