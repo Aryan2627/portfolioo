@@ -90,12 +90,13 @@
             <span class="logo-text">Aryan<span class="accent">.</span></span>
         </div>
         <ul class="nav-links">
-            <li><a href="#home"       class="nav-link">Home</a></li>
-            <li><a href="#what-i-do"  class="nav-link">What I Do</a></li>
-            <li><a href="#experience" class="nav-link">Experience</a></li>
-            <li><a href="#projects"   class="nav-link">Projects</a></li>
-            <li><a href="#skills"     class="nav-link">Stack</a></li>
-            <li><a href="#contact"    class="nav-link">Contact</a></li>
+            <li><a href="#home"         class="nav-link">Home</a></li>
+            <li><a href="#what-i-do"    class="nav-link">What I Do</a></li>
+            <li><a href="#experience"   class="nav-link">Experience</a></li>
+            <li><a href="#projects"     class="nav-link">Projects</a></li>
+            <li><a href="#skills"       class="nav-link">Stack</a></li>
+            <li><a href="#achievements" class="nav-link">Awards</a></li>
+            <li><a href="#contact"      class="nav-link">Contact</a></li>
         </ul>
         <div class="hamburger" id="hamburger">
             <span></span><span></span><span></span>
@@ -105,12 +106,13 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <ul>
-            <li><a href="#home"       class="mob-link">Home</a></li>
-            <li><a href="#what-i-do"  class="mob-link">What I Do</a></li>
-            <li><a href="#experience" class="mob-link">Experience</a></li>
-            <li><a href="#projects"   class="mob-link">Projects</a></li>
-            <li><a href="#skills"     class="mob-link">Stack</a></li>
-            <li><a href="#contact"    class="mob-link">Contact</a></li>
+            <li><a href="#home"         class="mob-link">Home</a></li>
+            <li><a href="#what-i-do"    class="mob-link">What I Do</a></li>
+            <li><a href="#experience"   class="mob-link">Experience</a></li>
+            <li><a href="#projects"     class="mob-link">Projects</a></li>
+            <li><a href="#skills"       class="mob-link">Stack</a></li>
+            <li><a href="#achievements" class="mob-link">Awards</a></li>
+            <li><a href="#contact"      class="mob-link">Contact</a></li>
         </ul>
     </div>
 
@@ -447,6 +449,120 @@
                         <h4>SQL Analytics & Power BI</h4>
                         <p>Certified · Data Analytics Track</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ACHIEVEMENTS ==================== -->
+        <section id="achievements" class="achievements-section">
+            <div class="section-header" data-reveal>
+                <span class="section-tag">// 04</span>
+                <h2 class="section-title">Awards & <span class="accent">Recognition</span></h2>
+                <p class="section-sub">Moments where the work spoke louder than the resume.</p>
+            </div>
+
+            <!-- Confetti canvas (fires on scroll into view) -->
+            <canvas id="confetti-canvas"></canvas>
+
+            <div class="achievements-grid">
+
+                <!-- Achievement 1: Myntra -->
+                <div class="ach-card glass-card" data-reveal data-ach-delay="0">
+                    <div class="ach-glow glow-myntra"></div>
+                    <div class="ach-rank-badge">
+                        <span class="rank-num" data-rank="50" data-prefix="TOP ">TOP 0</span>
+                    </div>
+                    <div class="ach-icon-wrap myntra-icon">
+                        <i class="fa-solid fa-ranking-star"></i>
+                    </div>
+                    <div class="ach-body">
+                        <div class="ach-org-row">
+                            <span class="ach-org">Myntra</span>
+                            <span class="ach-year">2024</span>
+                        </div>
+                        <h3 class="ach-title">Get Real with Myntra</h3>
+                        <p class="ach-desc">Ranked in the <strong>Top 50</strong> participants nationally in Myntra's flagship product & design challenge, competing against thousands of students across India's top colleges.</p>
+                        <div class="ach-meta">
+                            <span class="ach-tag"><i class="fa-solid fa-users"></i> National</span>
+                            <span class="ach-tag"><i class="fa-solid fa-trophy"></i> Product Design</span>
+                            <span class="ach-tag"><i class="fa-solid fa-fire"></i> Top 50</span>
+                        </div>
+                    </div>
+                    <div class="ach-shine"></div>
+                </div>
+
+                <!-- Achievement 2: UAE Design Mentorship -->
+                <div class="ach-card glass-card featured-ach" data-reveal data-ach-delay="120">
+                    <div class="ach-glow glow-uae"></div>
+                    <div class="ach-rank-badge star-badge">
+                        <span class="rank-num star-num" data-rating="4.3">0.0</span>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <div class="ach-icon-wrap uae-icon">
+                        <i class="fa-solid fa-medal"></i>
+                    </div>
+                    <div class="ach-body">
+                        <div class="ach-org-row">
+                            <span class="ach-org">UAE Region</span>
+                            <span class="ach-year">2025</span>
+                        </div>
+                        <h3 class="ach-title">Design Mentorship</h3>
+                        <p class="ach-desc">Achieved a <strong>4.3-star rating</strong> across the UAE for design mentorship — guiding students and early-career designers through product thinking, UX frameworks, and portfolio development.</p>
+                        <div class="ach-stars" id="achStars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-regular fa-star-half-stroke"></i>
+                        </div>
+                        <div class="ach-meta">
+                            <span class="ach-tag"><i class="fa-solid fa-globe"></i> International</span>
+                            <span class="ach-tag"><i class="fa-solid fa-chalkboard-user"></i> Mentorship</span>
+                            <span class="ach-tag uae-flag">🇦🇪 UAE</span>
+                        </div>
+                    </div>
+                    <div class="ach-shine"></div>
+                </div>
+
+                <!-- Achievement 3: ICABB -->
+                <div class="ach-card glass-card" data-reveal data-ach-delay="240">
+                    <div class="ach-glow glow-icabb"></div>
+                    <div class="ach-rank-badge silver-badge">
+                        <span class="rank-num" data-rank="2" data-prefix="#">#0</span>
+                    </div>
+                    <div class="ach-icon-wrap icabb-icon">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div class="ach-body">
+                        <div class="ach-org-row">
+                            <span class="ach-org">ICABB</span>
+                            <span class="ach-year">2024</span>
+                        </div>
+                        <h3 class="ach-title">2nd Rank — ICABB</h3>
+                        <p class="ach-desc">Secured <strong>2nd place</strong> at the International Conference & Academic Business Battle (ICABB) — a rigorous competition testing business strategy, analytical thinking, and presentation under pressure.</p>
+                        <div class="ach-meta">
+                            <span class="ach-tag"><i class="fa-solid fa-globe"></i> International</span>
+                            <span class="ach-tag"><i class="fa-solid fa-briefcase"></i> Business Strategy</span>
+                            <span class="ach-tag silver-tag"><i class="fa-solid fa-2"></i> Runner-up</span>
+                        </div>
+                    </div>
+                    <div class="ach-shine"></div>
+                </div>
+
+            </div>
+
+            <!-- Marquee ticker -->
+            <div class="ach-ticker" data-reveal>
+                <div class="ticker-track">
+                    <span>🏆 TOP 50 · MYNTRA GET REAL</span>
+                    <span>⭐ 4.3 STARS · UAE DESIGN MENTORSHIP</span>
+                    <span>🥈 2ND RANK · ICABB INTERNATIONAL</span>
+                    <span>🏆 TOP 50 · MYNTRA GET REAL</span>
+                    <span>⭐ 4.3 STARS · UAE DESIGN MENTORSHIP</span>
+                    <span>🥈 2ND RANK · ICABB INTERNATIONAL</span>
+                    <span>🏆 TOP 50 · MYNTRA GET REAL</span>
+                    <span>⭐ 4.3 STARS · UAE DESIGN MENTORSHIP</span>
+                    <span>🥈 2ND RANK · ICABB INTERNATIONAL</span>
                 </div>
             </div>
         </section>

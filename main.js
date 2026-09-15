@@ -443,3 +443,138 @@ document.addEventListener('mousemove', e => {
     card.style.transform = `translate(${dx * factor}px, ${dy * factor}px)`;
   });
 });
+
+/* ====================================================
+   ACHIEVEMENTS — RANK COUNTERS + CONFETTI
+   ==================================================== */
+
+/* ── Rank counter (integers: TOP 50, #2) ── */
+function animRankCounter(el) {
+  const target = parseInt(el.dataset.rank, 10);
+  const prefix = el.dataset.prefix || '';
+  const dur    = 1400;
+  const start  = performance.now();
+  function tick(now) {
+    const t   = Math.min((now - start) / dur, 1);
+    const eas = 1 - Math.pow(1 - t, 3);          // ease-out-cubic
+    const val = Math.round(eas * target);
+    el.textContent = prefix + val;
+    if (t < 1) requestAnimationFrame(tick);
+    else el.textContent = prefix + target;
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ── Rating counter (decimal: 4.3) ── */
+function animRatingCounter(el) {
+  const target = parseFloat(el.dataset.rating);
+  const dur    = 1600;
+  const start  = performance.now();
+  function tick(now) {
+    const t   = Math.min((now - start) / dur, 1);
+    const eas = 1 - Math.pow(1 - t, 3);
+    const val = (eas * target).toFixed(1);
+    el.textContent = val;
+    if (t < 1) requestAnimationFrame(tick);
+    else el.textContent = target.toFixed(1);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ── Confetti system ── */
+const confCanvas = document.getElementById('confetti-canvas');
+let confettiActive = false;
+
+function launchConfetti() {
+  if (!confCanvas || confettiActive) return;
+  confettiActive = true;
+
+  const ctx  = confCanvas.getContext('2d');
+  const W    = confCanvas.offsetWidth;
+  const H    = confCanvas.offsetHeight;
+  confCanvas.width  = W;
+  confCanvas.height = H;
+
+  const COLORS = ['#ff6b35','#f72585','#ffbe0b','#06d6a0','#7209b7','#ffffff'];
+  const PIECES = 120;
+  const pieces = Array.from({ length: PIECES }, () => ({
+    x:    Math.random() * W,
+    y:    -20 - Math.random() * 100,
+    w:    6  + Math.random() * 8,
+    h:    3  + Math.random() * 5,
+    rot:  Math.random() * 360,
+    vx:   (Math.random() - 0.5) * 4,
+    vy:   2  + Math.random() * 4,
+    vr:   (Math.random() - 0.5) * 8,
+    col:  COLORS[Math.floor(Math.random() * COLORS.length)],
+    life: 1,
+  }));
+
+  let frame;
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    let alive = 0;
+    pieces.forEach(p => {
+      p.x   += p.vx;
+      p.y   += p.vy;
+      p.rot += p.vr;
+      p.vy  += 0.08;                    // gravity
+      if (p.y > H + 20) { p.life = 0; return; }
+      alive++;
+      p.life = Math.max(0, 1 - p.y / H * 0.8);
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI / 180);
+      ctx.globalAlpha = p.life;
+      ctx.fillStyle = p.col;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    });
+    if (alive > 0) frame = requestAnimationFrame(draw);
+    else { ctx.clearRect(0, 0, W, H); confettiActive = false; }
+  }
+  draw();
+}
+
+/* ── Observer: fire everything when section enters view ── */
+const achSection = document.getElementById('achievements');
+if (achSection) {
+  const achObs = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    achObs.disconnect();
+
+    // Fire confetti
+    setTimeout(launchConfetti, 300);
+
+    // Animate integer rank counters
+    document.querySelectorAll('.rank-num[data-rank]').forEach((el, i) => {
+      setTimeout(() => animRankCounter(el), 200 + i * 120);
+    });
+
+    // Animate decimal rating counter
+    document.querySelectorAll('.star-num[data-rating]').forEach((el, i) => {
+      setTimeout(() => animRatingCounter(el), 200 + i * 120);
+    });
+
+    // Card staggered entrance (override data-reveal delay)
+    document.querySelectorAll('.ach-card').forEach((card, i) => {
+      const delay = parseInt(card.dataset.achDelay || 0, 10);
+      setTimeout(() => card.classList.add('revealed'), delay);
+    });
+
+  }, { threshold: 0.15 });
+  achObs.observe(achSection);
+}
+
+/* ── 3D tilt on achievement cards ── */
+document.querySelectorAll('.ach-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width  - 0.5;
+    const y = (e.clientY - rect.top)  / rect.height - 0.5;
+    card.style.transform = `perspective(700px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) translateY(-10px) scale(1.02)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});

@@ -1008,6 +1008,217 @@ section {
 .footer-socials a:hover { color: var(--orange); transform: translateY(-3px); }
 
 /* ====================================================
+   ACHIEVEMENTS
+   ==================================================== */
+.achievements-section { position: relative; }
+
+/* Confetti canvas */
+#confetti-canvas {
+    position: absolute; inset: 0; pointer-events: none;
+    width: 100%; height: 100%; z-index: 3;
+}
+
+/* Grid */
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-bottom: 48px;
+    position: relative; z-index: 2;
+}
+
+/* Card base */
+.ach-card {
+    padding: 36px 32px 32px;
+    position: relative; overflow: hidden;
+    display: flex; flex-direction: column; gap: 20px;
+    cursor: default;
+    transform-style: preserve-3d;
+}
+.ach-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,107,53,0.15);
+}
+
+/* Featured card — larger visual weight */
+.featured-ach {
+    border-color: rgba(255,190,11,0.25);
+    box-shadow: 0 0 60px rgba(255,190,11,0.06);
+}
+.featured-ach:hover {
+    border-color: rgba(255,190,11,0.45);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.7), 0 0 60px rgba(255,190,11,0.15);
+}
+
+/* Glow blobs */
+.ach-glow {
+    position: absolute; width: 220px; height: 220px;
+    border-radius: 50%; filter: blur(60px);
+    opacity: 0; top: -60px; right: -60px;
+    transition: opacity 0.6s var(--ease-out);
+    pointer-events: none;
+}
+.ach-card:hover .ach-glow { opacity: 0.25; }
+.glow-myntra { background: radial-gradient(circle, #ff6b35, #f72585); }
+.glow-uae    { background: radial-gradient(circle, #ffbe0b, #ff6b35); }
+.glow-icabb  { background: radial-gradient(circle, #c0c0c0, #7209b7); }
+
+/* Rank badge — top right floating pill */
+.ach-rank-badge {
+    position: absolute; top: 24px; right: 24px;
+    background: var(--grad-card);
+    border-radius: 999px;
+    padding: 6px 14px;
+    display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 4px 20px var(--glow-orange);
+    z-index: 2;
+}
+.rank-num {
+    font-family: var(--mono); font-size: 1rem; font-weight: 900;
+    color: #fff; letter-spacing: 1px;
+}
+/* Silver badge for #2 */
+.silver-badge {
+    background: linear-gradient(135deg, #a8a8b3, #c0c0c0, #888);
+    box-shadow: 0 4px 20px rgba(192,192,192,0.4);
+}
+/* Star badge */
+.star-badge {
+    background: linear-gradient(135deg, #ffbe0b, #ff6b35);
+    box-shadow: 0 4px 20px rgba(255,190,11,0.5);
+}
+.star-badge i { color: #fff; font-size: 0.85rem; }
+.star-num { font-size: 1.1rem; }
+
+/* Icon */
+.ach-icon-wrap {
+    width: 60px; height: 60px; border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem; flex-shrink: 0;
+}
+.myntra-icon {
+    background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(247,37,133,0.15));
+    border: 1px solid rgba(255,107,53,0.3);
+    color: var(--orange);
+}
+.uae-icon {
+    background: linear-gradient(135deg, rgba(255,190,11,0.15), rgba(255,107,53,0.15));
+    border: 1px solid rgba(255,190,11,0.3);
+    color: var(--yellow);
+}
+.icabb-icon {
+    background: linear-gradient(135deg, rgba(192,192,192,0.1), rgba(114,9,183,0.1));
+    border: 1px solid rgba(192,192,192,0.25);
+    color: #c0c0c0;
+}
+
+/* Body */
+.ach-body { display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.ach-org-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 8px;
+}
+.ach-org {
+    font-family: var(--mono); font-size: 0.72rem; letter-spacing: 2px;
+    color: var(--orange); text-transform: uppercase;
+}
+.ach-year {
+    font-family: var(--mono); font-size: 0.7rem;
+    color: var(--text-dim); letter-spacing: 1px;
+}
+.ach-title {
+    font-size: 1.3rem; font-weight: 800; letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+.ach-desc {
+    font-size: 0.92rem; color: var(--text-muted); line-height: 1.75;
+}
+.ach-desc strong { color: var(--text); }
+
+/* Star rating */
+.ach-stars {
+    display: flex; gap: 4px; margin-top: 2px;
+}
+.ach-stars i {
+    font-size: 1rem; color: var(--yellow);
+    filter: drop-shadow(0 0 4px rgba(255,190,11,0.6));
+    animation: starPop 0.4s var(--ease-spring) both;
+}
+.ach-stars i:nth-child(1) { animation-delay: 0.1s; }
+.ach-stars i:nth-child(2) { animation-delay: 0.2s; }
+.ach-stars i:nth-child(3) { animation-delay: 0.3s; }
+.ach-stars i:nth-child(4) { animation-delay: 0.4s; }
+.ach-stars i:nth-child(5) { animation-delay: 0.5s; }
+@keyframes starPop {
+    0%   { transform: scale(0) rotate(-30deg); opacity: 0; }
+    70%  { transform: scale(1.3) rotate(5deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Meta tags */
+.ach-meta {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+}
+.ach-tag {
+    font-size: 0.72rem; padding: 4px 12px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 999px; color: var(--text-muted);
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--mono);
+    transition: all 0.3s;
+}
+.ach-tag i { color: var(--orange); font-size: 0.65rem; }
+.ach-card:hover .ach-tag { border-color: rgba(255,107,53,0.2); }
+.silver-tag { border-color: rgba(192,192,192,0.25) !important; color: #c0c0c0; }
+.silver-tag i { color: #c0c0c0; }
+.uae-flag { font-size: 0.78rem; }
+
+/* Shine sweep animation */
+.ach-shine {
+    position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255,255,255,0.06) 50%,
+        transparent 60%
+    );
+    background-size: 200% 100%;
+    background-position: -100% 0;
+    transition: background-position 0s;
+}
+.ach-card:hover .ach-shine {
+    background-position: 200% 0;
+    transition: background-position 0.7s var(--ease-out);
+}
+
+/* ====== MARQUEE TICKER ====== */
+.ach-ticker {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    position: relative; z-index: 2;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.ticker-track {
+    display: flex; gap: 60px; width: max-content;
+    animation: ticker 20s linear infinite;
+}
+.ticker-track span {
+    font-family: var(--mono); font-size: 0.78rem; letter-spacing: 3px;
+    color: var(--text-muted); white-space: nowrap; text-transform: uppercase;
+    transition: color 0.3s;
+}
+.ticker-track span:hover { color: var(--orange); }
+@keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-33.33%); }
+}
+
+
+/* ====================================================
    RESPONSIVE
    ==================================================== */
 @media (max-width: 1100px) {
@@ -1026,6 +1237,7 @@ section {
     .skills-container { grid-template-columns: 1fr; }
     .edu-cert-row { grid-template-columns: 1fr; }
     .pillars-grid { grid-template-columns: 1fr; }
+    .achievements-grid { grid-template-columns: 1fr; }
     .hero-bg-text { display: none; }
 }
 @media (max-width: 768px) {
